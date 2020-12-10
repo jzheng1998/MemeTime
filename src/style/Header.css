@@ -1,0 +1,48 @@
+.headerContainer {
+  align-items: center;
+  background: cornflowerblue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 90px;
+  width: 100%;
+}
+
+.appTitleContainer {
+  cursor: pointer;
+  margin-left: 30px;
+}
+
+.appTitle {
+  color: white;
+  font-size: 35px;
+  margin: auto;
+}
+
+.signoutButton {
+  align-items: center;
+  background: #ff3333;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  margin-right: 30px;
+  outline: none;
+}
+
+.signout {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 0 10px;
+}
+
+.signoutText {
+  font-size: 24px;
+  margin: 10px 10px 10px 0px;
+}
+
+.white {
+  color: white;
+}
