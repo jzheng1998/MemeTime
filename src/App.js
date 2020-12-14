@@ -90,7 +90,6 @@ function App() {
           )
           .then((response) => {
             setUserReady(true);
-            console.log(response);
           })
           .catch((error) => {
             console.log(error);

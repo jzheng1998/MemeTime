@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import qs from "qs";
 import axios from "axios";
 import {
   Button,
@@ -52,35 +51,13 @@ function HomePage({ userReady, userId, setErrorMsg }) {
         },
       })
       .then((response) => {
-        getUserRooms(response.data.rooms);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userReady, userId, creatingGroup]);
-
-  const getUserRooms = (userRooms) => {
-    if (userRooms.length === 0) return;
-
-    axios
-      .get("https://secure-fjord-04428.herokuapp.com/room/retrieveMultiple", {
-        params: {
-          inputRooms: userRooms,
-        },
-        paramsSerializer: (params) => {
-          return qs.stringify(params);
-        },
-      })
-      .then((response) => {
-        setRooms(response.data.userRooms);
+        setRooms(response.data.response.rooms);
         setLoading(false);
       })
       .catch((error) => {
-        setErrorMsg("Cannot retrieve your rooms. Check back later.");
         console.log(error);
       });
-  };
+  }, [userReady, userId, creatingGroup]);
 
   const createNewRoom = () => {
     if (groupName === "") return;
@@ -129,8 +106,8 @@ function HomePage({ userReady, userId, setErrorMsg }) {
 
       <div className="groupContainer">
         {rooms?.length !== 0 ? (
-          rooms.map((room, i) => {
-            return <RoomCard key={i} roomName={room.roomName} />;
+          rooms.map((roomId, i) => {
+            return <RoomCard key={i} roomId={roomId} />;
           })
         ) : loading ? (
           <CircularProgress size={60} />
