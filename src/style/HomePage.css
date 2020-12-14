@@ -1,5 +1,41 @@
 .homeContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.addGroupIcon {
+  cursor: pointer;
+  margin: 40px;
+}
+
+.divider {
+  border-bottom: solid black 2px;
+  width: 600px;
+}
+
+.groupContainer {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 40px;
+  max-width: 1080px;
+}
+
+.cardContainer {
+  align-items: center;
+  border: solid black 3px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  height: 200px;
   justify-content: center;
+  margin: 30px;
+  text-align: center;
+  width: 300px;
+}
+
+.cardText {
+  overflow-wrap: normal;
 }

@@ -23,6 +23,7 @@ const firebaseConfig = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userReady, setUserReady] = useState(true);
   const [userInfo, setUserInfo] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -72,6 +73,7 @@ function App() {
       return;
     }
 
+    setUserReady(false);
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -87,6 +89,7 @@ function App() {
             `https://secure-fjord-04428.herokuapp.com/user/create?userId=${user.uid}`
           )
           .then((response) => {
+            setUserReady(true);
             console.log(response);
           })
           .catch((error) => {
@@ -131,7 +134,11 @@ function App() {
         </Route>
         <Route exact path="/">
           {loggedIn ? (
-            <HomePage userInfo={userInfo} />
+            <HomePage
+              userReady={userReady}
+              userId={userInfo?.uid}
+              setErrorMsg={setErrorMsg}
+            />
           ) : (
             <Redirect to="/login" />
           )}
