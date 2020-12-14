@@ -71,18 +71,16 @@ function App() {
     <div className="App">
       <Router>
         <Header loggedIn={loggedIn} />
-        <div className="mainContainer">
-          <Route exact path="/">
-            {loggedIn ? <HomePage /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/login">
-            {loggedIn ? (
-              <Redirect to="/" />
-            ) : (
-              <LoginPage loginFn={loginFn} registerFn={registerFn} />
-            )}
-          </Route>
-        </div>
+        <Route exact path="/">
+          {loggedIn ? <HomePage /> : <Redirect to="/login" />}
+        </Route>
+        <Route exact path="/login">
+          {loggedIn ? (
+            <Redirect to="/" />
+          ) : (
+            <LoginPage loginFn={loginFn} registerFn={registerFn} />
+          )}
+        </Route>
       </Router>
     </div>
   );

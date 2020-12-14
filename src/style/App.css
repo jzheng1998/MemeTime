@@ -3,14 +3,5 @@ html {
 }
 
 .App {
-  align-items: center;
   background-color: #fcfcfc;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.mainContainer {
-  margin: 0 auto;
-  max-width: 1080px;
 }
