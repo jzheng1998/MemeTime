@@ -11,12 +11,27 @@
 .appTitleContainer {
   cursor: pointer;
   margin-left: 30px;
+  width: 200px;
 }
 
 .appTitle {
   color: white;
   font-size: 35px;
   margin: auto;
+}
+
+.centerText {
+  color: white;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  width: 200px;
 }
 
 .signoutButton {
@@ -27,7 +42,6 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  margin-right: 30px;
   outline: none;
 }
 

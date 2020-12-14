@@ -22,7 +22,7 @@ const firebaseConfig = {
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function App() {
         setUserInfo(user);
       } else {
         setLoggedIn(false);
-        setUserInfo({});
+        setUserInfo(null);
       }
     });
     setLoading(false);
@@ -108,7 +108,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header loggedIn={loggedIn} signoutFn={signoutFn} />
+        <Header userInfo={userInfo} loggedIn={loggedIn} signoutFn={signoutFn} />
         <Route exact path="/login">
           {loggedIn ? (
             <Redirect to="/" />
