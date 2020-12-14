@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import { Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
@@ -6,8 +7,8 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 import "./style/App.css";
-import HomePage from "./containers/HomePage";
 import Header from "./components/Header";
+import HomePage from "./containers/HomePage";
 import LoginPage from "./containers/LoginPage";
 
 const firebaseConfig = {
@@ -79,6 +80,18 @@ function App() {
         user?.updateProfile({
           displayName: username,
         });
+
+        // Create new instance of user in firestore
+        axios
+          .get(
+            `https://secure-fjord-04428.herokuapp.com/user/create?userId=${user.uid}`
+          )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log("ACCOUNT CREATION FAILED: ", error);
@@ -124,8 +137,11 @@ function App() {
           )}
         </Route>
       </Router>
-
-      <Snackbar open={errorMsg} autoHideDuration={4000} onClose={handleClose}>
+      <Snackbar
+        open={errorMsg !== ""}
+        autoHideDuration={4000}
+        onClose={handleClose}
+      >
         <Alert onClose={handleClose} severity="error">
           {errorMsg}
         </Alert>
