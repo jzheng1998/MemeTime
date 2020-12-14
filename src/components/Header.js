@@ -1,12 +1,14 @@
 import React from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { useHistory } from "react-router-dom";
 
 import "../style/Header.css";
-import { Redirect } from "react-router";
 
 function Header({ userInfo, loggedIn, signoutFn }) {
+  const history = useHistory();
+
   const redirectHome = () => {
-    return <Redirect to="/" />;
+    history.push("/");
   };
 
   return (

@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import { Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/storage";
 
 import "./style/App.css";
 import Header from "./components/Header";
 import HomePage from "./containers/HomePage";
 import LoginPage from "./containers/LoginPage";
+import MemePage from "./containers/MemePage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDCgzN8jMtWOoiJkB3Pu_JS110OE8ykdE",
@@ -26,12 +29,14 @@ function App() {
   const [userReady, setUserReady] = useState(true);
   const [userInfo, setUserInfo] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
+  const [storageRef, setStorageRef] = useState(null);
 
   useEffect(() => {
     // Initialize Firebase
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
+    setStorageRef(firebase.storage().ref());
   }, []);
 
   useEffect(() => {
@@ -111,6 +116,15 @@ function App() {
       });
   };
 
+  const uploadImageToServer = (uri, fileType) => {
+    const r_id = uuidv4();
+    const ref = storageRef.child(`${r_id}.${fileType}`);
+    ref.putString(uri, "data_url").then((snapshot) => {
+      console.log("Uploaded successfully");
+      console.log(snapshot);
+    });
+  };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -129,6 +143,16 @@ function App() {
             <Redirect to="/" />
           ) : (
             <LoginPage loginFn={loginFn} registerFn={registerFn} />
+          )}
+        </Route>
+        <Route exact path="/meme">
+          {loggedIn ? (
+            <MemePage
+              uploadImageToServer={uploadImageToServer}
+              userInfo={userInfo}
+            />
+          ) : (
+            <Redirect to="/login" />
           )}
         </Route>
         <Route exact path="/">

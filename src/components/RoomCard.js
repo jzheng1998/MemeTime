@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-import "../style/HomePage.css";
+import { useHistory } from "react-router-dom";
 import { CircularProgress } from "@material-ui/core";
 
+import "../style/HomePage.css";
+
 function RoomCard({ roomId }) {
+  const history = useHistory();
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,10 +28,19 @@ function RoomCard({ roomId }) {
       });
   }, [roomId]);
 
+  const redirect = () => {
+    history.push({
+      pathname: "/meme",
+      state: {
+        roomId: roomId,
+      },
+    });
+  };
+
   if (!roomId) return;
 
   return (
-    <div className="cardContainer">
+    <div className="cardContainer" onClick={redirect}>
       {loading ? (
         <CircularProgress size={60} />
       ) : (
