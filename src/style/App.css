@@ -1,3 +1,16 @@
+html {
+  background-color: #fcfcfc;
+}
+
 .App {
-  background-color: #f2f2f2;
+  align-items: center;
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.mainContainer {
+  margin: 0 auto;
+  max-width: 1080px;
 }

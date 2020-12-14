@@ -1,14 +1,51 @@
 import React from "react";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import { Button } from "@material-ui/core";
+
+import "../style/LoginPage.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function LoginForm({ loginFn }) {
   return (
-    <div>
-      <form className="loginForm" onSubmit={(e) => loginFn(e)}>
-        <label htmlFor="loginEmail">Email</label>
-        <input type="email" name="loginEmail" />
+    <div className="formContainer">
+      <div className="formDescription">
+        <div className="formText">
+          <h3>Login</h3>
+          <p style={{ marginBottom: 0 }}>Enter email and password to log in:</p>
+        </div>
+        <VpnKeyIcon style={{ fontSize: 64 }} className="formIcon" />
+      </div>
 
-        <label htmlFor="loginPassword">Password</label>
-        <input type="password" name="loginPassword" />
+      <form className="inputContainer" onSubmit={(e) => loginFn(e)}>
+        <div className="form-floating mb-3">
+          <input
+            type="email"
+            name="loginEmail"
+            className="form-control"
+            id="floatingInput"
+          />
+          <label htmlFor="floatingInput">Email</label>
+        </div>
+
+        <div className="form-floating">
+          <input
+            type="password"
+            name="loginPassword"
+            className="form-control"
+            id="floatingPassword"
+          />
+          <label htmlFor="floatingPassword">Password</label>
+        </div>
+
+        <Button
+          style={{ marginTop: 20 }}
+          color="primary"
+          variant="contained"
+          disableElevation
+          type="submit"
+        >
+          Sign in!
+        </Button>
       </form>
     </div>
   );

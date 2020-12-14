@@ -21,9 +21,7 @@ function Header({ loggedIn, signoutFn }) {
             <ExitToAppIcon className="white" />
           </div>
         </button>
-      ) : (
-        <div></div>
-      )}
+      ) : null}
     </header>
   );
 }

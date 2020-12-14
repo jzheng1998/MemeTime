@@ -1,14 +1,12 @@
 import React from "react";
 import LoginForm from "../components/LoginForm";
+import RegisterForm from "../components/RegisterForm";
 
 function LoginPage({ loginFn, registerFn }) {
   return (
-    <div className="loginContainer">
-      <div>
-        <LoginForm loginFn={loginFn} />
-      </div>
-      <div></div>
-      <div></div>
+    <div className="pageContainer">
+      <LoginForm loginFn={loginFn} />
+      <RegisterForm registerFn={registerFn} />
     </div>
   );
 }

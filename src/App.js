@@ -41,18 +41,48 @@ function App() {
     setLoading(false);
   }, []);
 
+  const loginFn = (e) => {
+    e.preventDefault();
+
+    const email = e.currentTarget.loginEmail.value;
+    const password = e.currentTarget.loginPassword.value;
+
+    console.log(`Email: ${email} Password: ${password}`);
+  };
+
+  const registerFn = (e) => {
+    e.preventDefault();
+
+    const displayName = e.currentTarget.displayName.value;
+    const email = e.currentTarget.registerEmail.value;
+    const password = e.currentTarget.registerPassword.value;
+    const confirmPassword = e.currentTarget.registerConfirmPassword.value;
+
+    console.log(`Email: ${email} Password: ${password}`);
+
+    if (password !== confirmPassword) {
+      console.log("Wrong password");
+    }
+  };
+
   if (loading) return null;
 
   return (
     <div className="App">
       <Router>
         <Header loggedIn={loggedIn} />
-        <Route exact path="/">
-          {loggedIn ? <HomePage /> : <Redirect to="/login" />}
-        </Route>
-        <Route exact path="/login">
-          {loggedIn ? <Redirect to="/" /> : <LoginPage />}
-        </Route>
+        <div className="mainContainer">
+          <Route exact path="/">
+            {loggedIn ? <HomePage /> : <Redirect to="/login" />}
+          </Route>
+          <Route exact path="/login">
+            {loggedIn ? (
+              <Redirect to="/" />
+            ) : (
+              <LoginPage loginFn={loginFn} registerFn={registerFn} />
+            )}
+          </Route>
+        </div>
       </Router>
     </div>
   );

@@ -1,7 +1,35 @@
-.loginContainer {
+.pageContainer {
+  display: flex;
+  flex-direction: row;
 }
 
-.loginForm {
+.formContainer {
   display: flex;
   flex-direction: column;
+  margin: 20px;
+  width: 450px;
+}
+
+.formDescription {
+  align-items: center;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 20px;
+}
+
+.formText {
+  color: #999999;
+}
+
+.formIcon {
+  color: #d9d9d9;
+}
+
+.inputContainer {
+  background-color: #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
