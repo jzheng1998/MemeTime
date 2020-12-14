@@ -22,9 +22,9 @@ function LoginForm({ loginFn }) {
             type="email"
             name="loginEmail"
             className="form-control"
-            id="floatingInput"
+            id="loginEmail"
           />
-          <label htmlFor="floatingInput">Email</label>
+          <label htmlFor="loginEmail">Email</label>
         </div>
 
         <div className="form-floating">
@@ -32,9 +32,9 @@ function LoginForm({ loginFn }) {
             type="password"
             name="loginPassword"
             className="form-control"
-            id="floatingPassword"
+            id="loginPassword"
           />
-          <label htmlFor="floatingPassword">Password</label>
+          <label htmlFor="loginPassword">Password</label>
         </div>
 
         <Button

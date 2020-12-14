@@ -18,12 +18,8 @@ function RegisterForm({ registerFn }) {
 
       <form className="inputContainer" onSubmit={(e) => registerFn(e)}>
         <div className="form-floating mb-3">
-          <input
-            name="displayName"
-            className="form-control"
-            id="floatingName"
-          />
-          <label htmlFor="floatingName">Display Name</label>
+          <input name="username" className="form-control" id="registerName" />
+          <label htmlFor="registerName">Username</label>
         </div>
 
         <div className="form-floating mb-3">
@@ -31,9 +27,9 @@ function RegisterForm({ registerFn }) {
             type="email"
             name="registerEmail"
             className="form-control"
-            id="floatingEmail"
+            id="registerEmail"
           />
-          <label htmlFor="floatingEmail">Email</label>
+          <label htmlFor="registerEmail">Email</label>
         </div>
 
         <div className="form-floating mb-3">
@@ -41,9 +37,9 @@ function RegisterForm({ registerFn }) {
             type="password"
             name="registerPassword"
             className="form-control"
-            id="floatingPassword"
+            id="registerPassword"
           />
-          <label htmlFor="floatingPassword">Password</label>
+          <label htmlFor="registerPassword">Password</label>
         </div>
 
         <div className="form-floating">
@@ -51,9 +47,9 @@ function RegisterForm({ registerFn }) {
             type="password"
             name="registerConfirmPassword"
             className="form-control"
-            id="floatingConfirmPassword"
+            id="registerConfirmPassword"
           />
-          <label htmlFor="floatingConfirmPassword">Confirm Password</label>
+          <label htmlFor="registerConfirmPassword">Confirm Password</label>
         </div>
 
         <Button

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
+import { Snackbar } from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -18,9 +20,10 @@ const firebaseConfig = {
 };
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     // Initialize Firebase
@@ -36,6 +39,7 @@ function App() {
         setUserInfo(user);
       } else {
         setLoggedIn(false);
+        setUserInfo({});
       }
     });
     setLoading(false);
@@ -43,26 +47,60 @@ function App() {
 
   const loginFn = (e) => {
     e.preventDefault();
-
     const email = e.currentTarget.loginEmail.value;
     const password = e.currentTarget.loginPassword.value;
 
-    console.log(`Email: ${email} Password: ${password}`);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch((error) => {
+        console.log("LOGIN ERROR: ", error);
+        setErrorMsg(error.message);
+      });
   };
 
   const registerFn = (e) => {
     e.preventDefault();
-
-    const displayName = e.currentTarget.displayName.value;
+    const username = e.currentTarget.username.value;
     const email = e.currentTarget.registerEmail.value;
     const password = e.currentTarget.registerPassword.value;
     const confirmPassword = e.currentTarget.registerConfirmPassword.value;
 
-    console.log(`Email: ${email} Password: ${password}`);
-
     if (password !== confirmPassword) {
-      console.log("Wrong password");
+      setErrorMsg("Wrong password!");
+      return;
     }
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        const user = firebase.auth().currentUser;
+        user?.updateProfile({
+          displayName: username,
+        });
+      })
+      .catch((error) => {
+        console.log("ACCOUNT CREATION FAILED: ", error);
+        setErrorMsg(error.message);
+      });
+  };
+
+  const signoutFn = () => {
+    firebase
+      .auth()
+      .signOut()
+      .catch((error) => {
+        console.log("LOGOUT ERROR: ", error);
+        setErrorMsg(error.message);
+      });
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setErrorMsg("");
   };
 
   if (loading) return null;
@@ -70,10 +108,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header loggedIn={loggedIn} />
-        <Route exact path="/">
-          {loggedIn ? <HomePage /> : <Redirect to="/login" />}
-        </Route>
+        <Header loggedIn={loggedIn} signoutFn={signoutFn} />
         <Route exact path="/login">
           {loggedIn ? (
             <Redirect to="/" />
@@ -81,7 +116,20 @@ function App() {
             <LoginPage loginFn={loginFn} registerFn={registerFn} />
           )}
         </Route>
+        <Route exact path="/">
+          {loggedIn ? (
+            <HomePage userInfo={userInfo} />
+          ) : (
+            <Redirect to="/login" />
+          )}
+        </Route>
       </Router>
+
+      <Snackbar open={errorMsg} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {errorMsg}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
