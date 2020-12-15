@@ -13,8 +13,10 @@ function Header({ userInfo, loggedIn, signoutFn }) {
 
   return (
     <header className="headerContainer">
-      <div className="appTitleContainer" onClick={redirectHome}>
-        <h2 className="appTitle">MemeTime</h2>
+      <div className="appTitleContainer">
+        <div onClick={redirectHome}>
+          <h2 className="appTitle">MemeTime</h2>
+        </div>
       </div>
 
       {userInfo ? (
@@ -25,12 +27,9 @@ function Header({ userInfo, loggedIn, signoutFn }) {
               : "Welcome!"}
           </h1>
           <div className="buttonContainer">
-            <button className="signoutButton" onClick={() => signoutFn()}>
-              <div className="signout">
-                <h3 className="white signoutText">Exit</h3>
-                <ExitToAppIcon className="white" />
-              </div>
-            </button>
+            <div onClick={() => signoutFn()}>
+              <ExitToAppIcon style={{ fontSize: 40 }} className="signout" />
+            </div>
           </div>
         </>
       ) : null}

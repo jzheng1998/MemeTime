@@ -25,8 +25,15 @@
 .sideContainer {
   align-items: center;
   display: flex;
+  flex: 1;
+}
+
+.leftSide {
+  justify-content: flex-start;
+}
+
+.rightSide {
   justify-content: flex-end;
-  width: 150px;
 }
 
 .favoriteIcon {

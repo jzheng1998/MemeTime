@@ -26,6 +26,7 @@ function MemePage({
 }) {
   const location = useLocation();
   const [roomId, setRoomId] = useState(null);
+  const [roomName, setRoomName] = useState("");
   const [joined, setJoined] = useState(false);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -46,7 +47,7 @@ function MemePage({
         },
       })
       .then((response) => {
-        const joinedRooms = response?.data?.response?.rooms;
+        const joinedRooms = response.data.response.rooms;
         setJoined(joinedRooms?.includes(roomId));
       })
       .catch((error) => {
@@ -67,6 +68,7 @@ function MemePage({
       .then((response) => {
         setLoading(false);
         setPosts(response.data.response.posts);
+        setRoomName(response.data.response.roomName);
       })
       .catch((error) => {
         console.log(error);
@@ -103,8 +105,7 @@ function MemePage({
       <div className="maxWidth">
         {userInfo ? (
           <div className="topContainer">
-            <div className="sideContainer"></div>
-            <div className="centerContainer">
+            <div className="sideContainer leftSide">
               <input
                 accept="image/*"
                 id="raised-button-file"
@@ -119,7 +120,10 @@ function MemePage({
                 </Button>
               </label>
             </div>
-            <div className="sideContainer">
+            <div className="centerContainer">
+              <h2>{roomName}</h2>
+            </div>
+            <div className="sideContainer rightSide">
               <Button
                 disableElevation
                 variant="contained"
