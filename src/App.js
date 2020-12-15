@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 import { Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
@@ -90,9 +89,11 @@ function App() {
 
         // Create new instance of user in firestore
         axios
-          .get(
-            `https://secure-fjord-04428.herokuapp.com/user/create?userId=${user.uid}`
-          )
+          .get("https://secure-fjord-04428.herokuapp.com/user/create", {
+            params: {
+              userId: user.uid,
+            },
+          })
           .then((response) => {
             setUserReady(true);
           })
@@ -116,13 +117,33 @@ function App() {
       });
   };
 
-  const uploadImageToServer = (uri, fileType) => {
-    const r_id = uuidv4();
-    const ref = storageRef.child(`${r_id}.${fileType}`);
+  const uploadImageToServer = (uri, fileName, setUploading) => {
+    const ref = storageRef.child(fileName);
     ref.putString(uri, "data_url").then((snapshot) => {
       console.log("Uploaded successfully");
-      console.log(snapshot);
+      setUploading(false);
     });
+  };
+
+  const getImageFromServer = (fileName, setUrl) => {
+    const ref = storageRef.child(fileName);
+    ref.getDownloadURL().then((url) => {
+      setUrl(url);
+    });
+  };
+
+  const uploadPost = (roomId, postId, username) => {
+    axios
+      .get("https://secure-fjord-04428.herokuapp.com/room/addPost", {
+        params: {
+          roomId: roomId,
+          postId: postId,
+          username: username,
+        },
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleClose = (event, reason) => {
@@ -149,6 +170,8 @@ function App() {
           {loggedIn ? (
             <MemePage
               uploadImageToServer={uploadImageToServer}
+              getImageFromServer={getImageFromServer}
+              uploadPost={uploadPost}
               userInfo={userInfo}
             />
           ) : (

@@ -1,2 +1,54 @@
 .mainContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.maxWidth {
+  max-width: 1080px;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
+.post {
+  align-items: center;
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  margin: 10px;
+  width: 300px;
+}
+
+.postImage {
+  position: relative;
+}
+
+.postImg {
+  border: solid black 1px;
+  border-radius: 8px;
+  max-height: 300px;
+  max-width: 300px;
+}
+
+.postBy {
+  background: rgba(255, 255, 255, 0.5);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 0;
+}
+
+.postByText {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  padding: 3px 0;
 }
