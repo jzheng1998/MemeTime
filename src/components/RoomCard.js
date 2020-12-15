@@ -30,7 +30,7 @@ function RoomCard({ roomId }) {
 
   const redirect = () => {
     history.push({
-      pathname: "/meme",
+      pathname: `/room/${roomId}`,
       state: {
         roomId: roomId,
       },

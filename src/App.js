@@ -11,7 +11,7 @@ import "./style/App.css";
 import Header from "./components/Header";
 import HomePage from "./containers/HomePage";
 import LoginPage from "./containers/LoginPage";
-import MemePage from "./containers/MemePage";
+import RoomPage from "./containers/RoomPage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDCgzN8jMtWOoiJkB3Pu_JS110OE8ykdE",
@@ -166,9 +166,12 @@ function App() {
             <LoginPage loginFn={loginFn} registerFn={registerFn} />
           )}
         </Route>
-        <Route exact path="/meme">
+        <Route exact path="/room">
+          <Redirect to="/" />
+        </Route>
+        <Route exact path="/room/:id">
           {loggedIn ? (
-            <MemePage
+            <RoomPage
               uploadImageToServer={uploadImageToServer}
               getImageFromServer={getImageFromServer}
               uploadPost={uploadPost}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 
-import "../style/MemePage.css";
+import "../style/RoomPage.css";
 
 function Post({ postId, getImageFromServer }) {
   const [loading, setLoading] = useState(true);

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 import { v4 as uuidv4 } from "uuid";
 
-import "../style/MemePage.css";
+import "../style/RoomPage.css";
 import Post from "../components/Post";
 
 const fileToDataUri = (file) =>
@@ -71,10 +72,18 @@ function MemePage({
   return (
     <div className="mainContainer">
       <div className="maxWidth">
-        <input
-          type="file"
-          onChange={(event) => onChange(event.target.files[0] || null)}
-        />
+        <div className="topContainer">
+          <div className="sideContainer"></div>
+          <div className="centerContainer">
+            <input
+              type="file"
+              onChange={(event) => onChange(event.target.files[0] || null)}
+            />
+          </div>
+          <div className="sideContainer">
+            <StarBorderIcon size={60} />
+          </div>
+        </div>
         <div className="postContainer">
           {posts?.length !== 0 ? (
             posts.map((postId, i) => {
