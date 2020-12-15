@@ -61,7 +61,6 @@ function HomePage({ userReady, userId, setErrorMsg }) {
 
   const createNewRoom = () => {
     if (groupName === "") return;
-    setGroupName("");
     setCreatingGroup(true);
 
     axios
@@ -90,6 +89,7 @@ function HomePage({ userReady, userId, setErrorMsg }) {
       .then((response) => {
         setOpen(false);
         setCreatingGroup(false);
+        setGroupName("");
       })
       .catch((error) => {
         setErrorMsg("Failed to add room to user.");

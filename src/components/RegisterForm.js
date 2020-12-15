@@ -16,14 +16,24 @@ function RegisterForm({ registerFn }) {
         <EditIcon style={{ fontSize: 64 }} className="formIcon" />
       </div>
 
-      <form className="inputContainer" onSubmit={(e) => registerFn(e)}>
+      <form
+        autoComplete="off"
+        className="inputContainer"
+        onSubmit={(e) => registerFn(e)}
+      >
         <div className="form-floating mb-3">
-          <input name="username" className="form-control" id="registerName" />
+          <input
+            autoComplete="off"
+            name="username"
+            className="form-control"
+            id="registerName"
+          />
           <label htmlFor="registerName">Username</label>
         </div>
 
         <div className="form-floating mb-3">
           <input
+            autoComplete="off"
             type="email"
             name="registerEmail"
             className="form-control"

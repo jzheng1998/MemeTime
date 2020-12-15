@@ -16,9 +16,14 @@ function LoginForm({ loginFn }) {
         <VpnKeyIcon style={{ fontSize: 64 }} className="formIcon" />
       </div>
 
-      <form className="inputContainer" onSubmit={(e) => loginFn(e)}>
+      <form
+        autoComplete="off"
+        className="inputContainer"
+        onSubmit={(e) => loginFn(e)}
+      >
         <div className="form-floating mb-3">
           <input
+            autoComplete="off"
             type="email"
             name="loginEmail"
             className="form-control"
