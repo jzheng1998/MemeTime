@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import "../style/Header.css";
 
-function Header({ userInfo, loggedIn, signoutFn }) {
+function Header({ userInfo, signoutFn }) {
   const history = useHistory();
 
   const redirectHome = () => {

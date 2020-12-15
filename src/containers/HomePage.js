@@ -61,6 +61,7 @@ function HomePage({ userReady, userId, setErrorMsg }) {
 
   const createNewRoom = () => {
     if (groupName === "") return;
+    setGroupName("");
     setCreatingGroup(true);
 
     axios
