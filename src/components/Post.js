@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { CircularProgress } from "@material-ui/core";
+import {
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 
 import "../style/RoomPage.css";
 
 function Post({ postId, getImageFromServer }) {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
   const [post, setPost] = useState(null);
   const [url, setUrl] = useState("");
 
@@ -33,13 +43,32 @@ function Post({ postId, getImageFromServer }) {
       ) : (
         <div>
           <div className="postImage">
-            <img className="postImg" alt="post" src={url} />
+            <img
+              onClick={() => setOpen(true)}
+              className="postImg"
+              alt="post"
+              src={url}
+            />
             <div className="postBy">
               <p className="postByText">{`By: ${post?.createBy}`}</p>
             </div>
           </div>
         </div>
       )}
+
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        fullScreen={fullScreen}
+      >
+        <DialogContent>
+          <img
+            style={{ maxHeight: "100%", maxWidth: "100%" }}
+            alt="fullImage"
+            src={url}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
