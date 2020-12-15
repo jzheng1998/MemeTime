@@ -132,6 +132,38 @@ function App() {
     });
   };
 
+  const addRoomToUser = (roomId, setJoined) => {
+    axios
+      .get("https://secure-fjord-04428.herokuapp.com/user/addRoom", {
+        params: {
+          userId: userInfo?.uid,
+          roomId: roomId,
+        },
+      })
+      .then(() => {
+        setJoined(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const removeRoomFromUser = (roomId, setJoined) => {
+    axios
+      .get("https://secure-fjord-04428.herokuapp.com/user/removeRoom", {
+        params: {
+          userId: userInfo?.uid,
+          roomId: roomId,
+        },
+      })
+      .then(() => {
+        setJoined(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const uploadPost = (roomId, postId, username) => {
     axios
       .get("https://secure-fjord-04428.herokuapp.com/room/addPost", {
@@ -170,16 +202,14 @@ function App() {
           <Redirect to="/" />
         </Route>
         <Route exact path="/room/:id">
-          {loggedIn ? (
-            <RoomPage
-              uploadImageToServer={uploadImageToServer}
-              getImageFromServer={getImageFromServer}
-              uploadPost={uploadPost}
-              userInfo={userInfo}
-            />
-          ) : (
-            <Redirect to="/login" />
-          )}
+          <RoomPage
+            uploadImageToServer={uploadImageToServer}
+            getImageFromServer={getImageFromServer}
+            addRoomToUser={addRoomToUser}
+            removeRoomFromUser={removeRoomFromUser}
+            uploadPost={uploadPost}
+            userInfo={userInfo}
+          />
         </Route>
         <Route exact path="/">
           {loggedIn ? (

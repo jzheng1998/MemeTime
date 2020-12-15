@@ -29,6 +29,10 @@
   width: 150px;
 }
 
+.favoriteIcon {
+  cursor: pointer;
+}
+
 .postContainer {
   display: flex;
   flex-direction: row;
@@ -38,7 +42,6 @@
 }
 
 .post {
-  align-items: center;
   display: flex;
   height: 300px;
   justify-content: center;

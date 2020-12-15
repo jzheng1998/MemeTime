@@ -31,10 +31,12 @@ function Post({ postId, getImageFromServer }) {
       {loading || url === "" ? (
         <CircularProgress size={60} />
       ) : (
-        <div className="postImage">
-          <img className="postImg" alt="post" src={url} />
-          <div className="postBy">
-            <p className="postByText">{`By: ${post?.createBy}`}</p>
+        <div>
+          <div className="postImage">
+            <img className="postImg" alt="post" src={url} />
+            <div className="postBy">
+              <p className="postByText">{`By: ${post?.createBy}`}</p>
+            </div>
           </div>
         </div>
       )}
